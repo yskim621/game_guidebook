@@ -18,10 +18,10 @@ import javax.persistence.NoResultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 
-import com.huayin.common.persist.entity.AbstractEntity;
-import com.huayin.common.persist.query.DynamicQuery;
-import com.huayin.common.persist.query.SearchResult;
-import com.huayin.common.persist.query.constants.QueryConstants.LockType;
+import game.common.persist.entity.AbstractEntity;
+import game.common.persist.query.DynamicQuery;
+import game.common.persist.query.SearchResult;
+import game.common.persist.query.constants.QueryConstants.LockType;
 
 /**
  * <pre>
