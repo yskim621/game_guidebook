@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -34,10 +35,10 @@ public class BoardController {
     }
 
 
-    @RequestMapping(value="get/{boardnum}", method = RequestMethod.GET)
-    public String detail(HttpServletRequest request) {
+    @RequestMapping(value="get/{id}", method = RequestMethod.GET)
+    public String detail(HttpServletRequest request, @PathVariable Long id) {
 
-        boardService.detail(request);
+        boardService.detail(id);
 
         return "board/detail";
     }
@@ -51,10 +52,10 @@ public class BoardController {
 
 
     @RequestMapping(value="alter/{boardnum}", method = RequestMethod.GET)
-    public String update(HttpServletRequest request) {
+    public String update(HttpServletRequest request, @PathVariable Long id) {
 
         // 서비스 메소드 호출
-        boardService.detail(request);
+        boardService.detail(id);
 
         return "board/update";
     }
