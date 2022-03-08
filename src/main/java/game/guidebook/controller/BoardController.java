@@ -7,11 +7,11 @@ import game.guidebook.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -34,16 +34,17 @@ public class BoardController {
                        @RequestParam(value = "limit", defaultValue = "100") int limit
     ) {
 
-        List<Board> boards = boardService.list(offset, limit);
-        model.addAttribute("result", boards);
+//        List<Board> boards = boardService.list(offset, limit);
+//        model.addAttribute("result", boards);
         return "board/list";
     }
 
 
     @RequestMapping(value="get/{id}", method = RequestMethod.GET)
-    public String detail(HttpServletRequest request, @PathVariable Long id) {
+    public String detail(@PathVariable Long id, ModelMap map) {
 
-        boardService.detail(id);
+        Board board = boardRepository.findOne(id);
+        map.put("board", board);
 
         return "board/detail";
     }
