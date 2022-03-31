@@ -40,7 +40,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void delete(HttpServletRequest request) {
-
+    public Long delete(Long id) {
+        return boardRepository.delete(id);
     }
 }
