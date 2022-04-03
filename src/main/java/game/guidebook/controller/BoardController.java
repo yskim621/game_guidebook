@@ -1,6 +1,7 @@
 package game.guidebook.controller;
 
-import game.guidebook.api.dto.BoardDto;
+import game.common.util.Validate;
+import game.guidebook.common.AjaxResponseBody;
 import game.guidebook.domain.Board;
 import game.guidebook.repository.BoardRepository;
 import game.guidebook.service.BoardService;
@@ -10,13 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping(value="board")
-public class BoardController {
+public class BoardController extends BaseController {
 
     private final BoardService boardService;
     private final BoardRepository boardRepository;
@@ -40,7 +39,7 @@ public class BoardController {
     }
 
 
-    @RequestMapping(value="get/{id}", method = RequestMethod.GET)
+    @GetMapping("get/{id}")
     public String detail(@PathVariable Long id, ModelMap map) {
 
         Board board = boardRepository.findOne(id);
@@ -57,12 +56,28 @@ public class BoardController {
     }
 
 
-    @RequestMapping(value="alter/{boardnum}", method = RequestMethod.GET)
-    public String update(HttpServletRequest request, @PathVariable Long id) {
+    @GetMapping("update/{id}")
+    public String update(@PathVariable Long id, ModelMap map) {
 
         // 서비스 메소드 호출
-        boardService.detail(id);
+        Board board = boardRepository.findOne(id);
+        map.put("board", board);
 
         return "board/update";
+    }
+
+    @PostMapping("update/{id}")
+    public AjaxResponseBody updateContent(@PathVariable("id") Long id, @ModelAttribute("board") Board board) {
+        System.out.println("id = " + id + "=====================================================================");
+        try
+        {
+            boardService.update(id, board);
+            return returnSuccessBody("수정이 완료되었습니다.");
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return returnErrorBody(ex);
+        }
     }
 }
