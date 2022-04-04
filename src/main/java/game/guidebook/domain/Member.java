@@ -2,28 +2,46 @@ package game.guidebook.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.Date;
 
 @Entity
 public class Member {
 
     @Id
-    @Column(name = "id", nullable = false)
+    @GeneratedValue
     private Long id;
 
-    private String memberemail;
+    private String email;
 
-    private String memberpassword;
+    private String password;
 
-    private String membername;
+    private String name;
 
-    private String memberphone;
+    private String phoneNumber;
 
-    private String membernickname;
+    private String nickname;
 
-    private String membergender;
+    private String gender;
 
-    private String memberleave;
+    private String leave;
+
+    private String lastLoginIp;
+
+    private Date lastLoginTime;
+
+    private Integer loginCount;
+
+    private Integer loginErrCount;
+
+    private String createName;
+
+    private String updateName;
+
+    private Date createTime;
+
+    private Date updateTime;
 
     public Long getId() {
         return id;
@@ -33,59 +51,123 @@ public class Member {
         this.id = id;
     }
 
-    public String getMemberemail() {
-        return memberemail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setMemberemail(String memberemail) {
-        this.memberemail = memberemail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getMemberpassword() {
-        return memberpassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setMemberpassword(String memberpassword) {
-        this.memberpassword = memberpassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getMembername() {
-        return membername;
+    public String getName() {
+        return name;
     }
 
-    public void setMembername(String membername) {
-        this.membername = membername;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getMemberphone() {
-        return memberphone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setMemberphone(String memberphone) {
-        this.memberphone = memberphone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getMembernickname() {
-        return membernickname;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setMembernickname(String membernickname) {
-        this.membernickname = membernickname;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
-    public String getMembergender() {
-        return membergender;
+    public String getGender() {
+        return gender;
     }
 
-    public void setMembergender(String membergender) {
-        this.membergender = membergender;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
-    public String getMemberleave() {
-        return memberleave;
+    public String getLeave() {
+        return leave;
     }
 
-    public void setMemberleave(String memberleave) {
-        this.memberleave = memberleave;
+    public void setLeave(String leave) {
+        this.leave = leave;
+    }
+
+    public String getLastLoginIp() {
+        return lastLoginIp;
+    }
+
+    public void setLastLoginIp(String lastLoginIp) {
+        this.lastLoginIp = lastLoginIp;
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
+
+    public Integer getLoginCount() {
+        return loginCount;
+    }
+
+    public void setLoginCount(Integer loginCount) {
+        this.loginCount = loginCount;
+    }
+
+    public Integer getLoginErrCount() {
+        return loginErrCount;
+    }
+
+    public void setLoginErrCount(Integer loginErrCount) {
+        this.loginErrCount = loginErrCount;
+    }
+
+    public String getCreateName() {
+        return createName;
+    }
+
+    public void setCreateName(String createName) {
+        this.createName = createName;
+    }
+
+    public String getUpdateName() {
+        return updateName;
+    }
+
+    public void setUpdateName(String updateName) {
+        this.updateName = updateName;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }
