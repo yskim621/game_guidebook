@@ -11,11 +11,9 @@ package game.common.persist.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
+import game.common.persist.OperateLogListener;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
@@ -28,7 +26,7 @@ import org.apache.commons.lang.builder.ToStringStyle;
  */
 @MappedSuperclass
 @Inheritance(strategy = InheritanceType.JOINED)
-//@EntityListeners(OperateLogListener.class)
+@EntityListeners(OperateLogListener.class)
 public abstract class AbstractEntity implements Serializable
 {
 	private static final long serialVersionUID = 6757814772463743205L;
