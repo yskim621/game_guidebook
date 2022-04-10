@@ -1,6 +1,5 @@
 package game.guidebook.domain;
 
-import com.fasterxml.jackson.databind.DatabindException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,6 +27,8 @@ public class Board {
 
     private String attachment;
 
-    private String memberNickname;
+    private String userNickname;
+
+//    private Long userId;
 
 }
