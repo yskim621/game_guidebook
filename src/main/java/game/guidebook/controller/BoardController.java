@@ -1,7 +1,5 @@
 package game.guidebook.controller;
 
-import game.common.util.Validate;
-import game.guidebook.common.AjaxResponseBody;
 import game.guidebook.domain.Board;
 import game.guidebook.repository.BoardRepository;
 import game.guidebook.service.BoardService;
@@ -33,8 +31,6 @@ public class BoardController extends BaseController {
                        @RequestParam(value = "limit", defaultValue = "100") int limit
     ) {
 
-//        List<Board> boards = boardService.list(offset, limit);
-//        model.addAttribute("result", boards);
         return "board/list";
     }
 
@@ -49,8 +45,8 @@ public class BoardController extends BaseController {
     }
 
 
-    @RequestMapping(value="write", method = RequestMethod.GET)
-    public String insert() {
+    @GetMapping("create")
+    public String create() {
 
         return "board/create";
     }
@@ -66,18 +62,4 @@ public class BoardController extends BaseController {
         return "board/update";
     }
 
-    @PostMapping("update/{id}")
-    public AjaxResponseBody updateContent(@PathVariable("id") Long id, @ModelAttribute("board") Board board) {
-        System.out.println("id = " + id + "=====================================================================");
-        try
-        {
-            boardService.update(id, board);
-            return returnSuccessBody("수정이 완료되었습니다.");
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-            return returnErrorBody(ex);
-        }
-    }
 }
