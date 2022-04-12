@@ -1,5 +1,7 @@
 package game.guidebook.service.impl;
 
+import game.common.persist.query.SearchResult;
+import game.guidebook.api.dto.BoardDto;
 import game.guidebook.domain.Board;
 import game.guidebook.repository.BoardRepository;
 import game.guidebook.service.BoardService;
@@ -9,8 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -20,8 +23,17 @@ public class BoardServiceImpl implements BoardService {
     private final BoardRepository boardRepository;
 
     @Override
-    public List<Board> list(QueryParam query_param, int offset, int limit) {
-        return boardRepository.findAll(query_param, offset, limit);
+    public SearchResult<BoardDto> findAll(QueryParam query_param, int offset, int limit) {
+
+        List<Board> boards = boardRepository.findAll(query_param, offset, limit);
+        List<BoardDto> collect = boards.stream()
+                .map(BoardDto::new)
+                .collect(Collectors.toList());
+
+        SearchResult<BoardDto> result = new SearchResult<>();
+        result.setResult(collect);
+        result.setCount(collect.size());
+        return result;
     }
 
     @Override
@@ -35,8 +47,13 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public void update(MultipartHttpServletRequest request) {
-
+    public Long update(Long id, Board board) {
+        Board originalContent = boardRepository.findOne(id);
+        originalContent.setTitle(board.getTitle());
+        originalContent.setContent(board.getContent());
+        originalContent.setAttachment(board.getAttachment());
+        originalContent.setWriteDate(new Date());
+        return id;
     }
 
     @Override
