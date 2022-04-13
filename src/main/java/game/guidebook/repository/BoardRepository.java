@@ -16,11 +16,11 @@ public class BoardRepository {
     private final EntityManager em;
 
     public List<Board> findAll(QueryParam query_param, int offset, int limit){
-        query_param.setPageNumber(query_param.getPageNumber());
         query_param.setPageSize(query_param.getPageSize());
+        query_param.setPageNumber(query_param.getPageNumber());
         return em.createQuery("select b from Board b", Board.class)
-                .setFirstResult(query_param.getPageNumber())
-                .setMaxResults(query_param.getPageSize())
+                .setFirstResult(offset)
+                .setMaxResults(limit)
                 .getResultList();
     }
 
