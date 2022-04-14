@@ -27,17 +27,9 @@ public class BoardApiController extends BaseController {
     @PostMapping("ajaxList")
     public SearchResult<BoardDto> contentList(@RequestBody QueryParam query_param, Model model,
                                @RequestParam(value = "offset", defaultValue = "0") int offset,
-                               @RequestParam(value = "limit", defaultValue = "10") int limit
+                               @RequestParam(value = "limit", defaultValue = "100") int limit
     ) {
-        List<Board> boards = boardRepository.findAll(query_param, offset, limit);
-        List<BoardDto> collect = boards.stream()
-                .map(BoardDto::new)
-                .collect(Collectors.toList());
-
-        SearchResult<BoardDto> result = new SearchResult<>();
-        result.setResult(collect);
-        result.setCount(collect.size());
-        return result;
+        return boardService.findAll(query_param, offset, limit);
     }
 
     @PostMapping("delete/{id}")
@@ -58,4 +50,17 @@ public class BoardApiController extends BaseController {
         }
     }
 
+    @PostMapping("update/{id}")
+    public AjaxResponseBody updateContent(@PathVariable("id") Long id, @ModelAttribute("board") Board board) {
+        try
+        {
+            boardService.update(id, board);
+            return returnSuccessBody("수정이 완료 되었습니다.");
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return returnErrorBody(ex);
+        }
+    }
 }
