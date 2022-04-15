@@ -1,5 +1,7 @@
 package game.guidebook.service;
 
+import game.common.persist.query.SearchResult;
+import game.guidebook.api.dto.BoardDto;
 import game.guidebook.domain.Board;
 import game.guidebook.service.dto.QueryParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -10,7 +12,7 @@ import java.util.List;
 public interface BoardService {
 
     // 전체 보기를 위한 메소드
-    public List<Board> list(QueryParam query_param, int offset, int limit);
+    public SearchResult<BoardDto> findAll(QueryParam query_param, int offset, int limit);
 
     // 상세 보기를 위한 메소드
     public Board detail(Long id);
@@ -19,8 +21,8 @@ public interface BoardService {
     public void create(MultipartHttpServletRequest request);
 
     // 데이터 수정을 위한 메소드
-    public void update(MultipartHttpServletRequest request);
+    public Long update(Long id, Board board);
 
     // 데이터 삭제을 위한 메소드
-    public void delete(HttpServletRequest request);
+    public Long delete(Long id);
 }
