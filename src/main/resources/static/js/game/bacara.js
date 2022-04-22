@@ -26,6 +26,8 @@ window.addEventListener("load", function(event){
 			var bacaraImgSrc = $("#bacara").attr("src");
 			$(".image > img").attr("src", bacaraImgSrc);
 			$(".image > img").attr("width", "50%");
+			$(".no2 > a").replaceWith("<h3>바카라는 플레이어(Player)와 뱅커(Banker) 중 어느 핸드가 이길지 예상하여 베팅을 합니다</h3>");
+			$(".no2 > h3").attr("style", "font-size: 1.5em")
 			document.querySelectorAll(".center")[1].setAttribute("border", 5);
 			document.querySelectorAll(".center")[1].setAttribute("style", "text-align: center;");
 			document.querySelectorAll(".center")[2].setAttribute("border", 5);
