@@ -8,7 +8,7 @@ import javax.persistence.Column;
 
 @Slf4j
 @Controller
-public class HomeController {
+public class HomeController extends BaseController {
 
     @RequestMapping("/")
     public String home() {
