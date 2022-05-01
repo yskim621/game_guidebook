@@ -18,13 +18,6 @@ public class BoardController extends BaseController {
     private final BoardService boardService;
     private final BoardRepository boardRepository;
 
-
-//    @GetMapping("/")
-//    public String board(HttpServletRequest request) {
-//
-//        return "member/login/login";
-//    }
-
     @GetMapping("list")
     public String list(Model model,
                        @RequestParam(value = "offset", defaultValue = "0") int offset,
