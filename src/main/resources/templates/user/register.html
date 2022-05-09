@@ -1,0 +1,77 @@
+<!-- 에러가 발생한 경우 보여질 페이지 설정 -->
+<!--<%@ page errorPage="${pageContext.request.contextPath}/WEB-INF/views/exceptionhandling/error404.jsp"%>-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2H59G05B23"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2H59G05B23');
+</script>
+<body>
+<div id="page-wrapper">
+
+    <div th:replace="fragments/bodyHeader :: bodyHeader"></div>
+
+    <div id="header" class="hy_count">
+        <div class="container hy_wrap">
+            <div class="main" style="alignment: center">
+                <div class="main_wrap">
+                    <div class="main_container">
+                        <!--회원가입계정Start-->
+                        <div class="main_left">
+                            <form id="registerForm" method="post" th:action="@{/register/form-submit}" style="height: 100%;">
+                                <h3>회&nbsp;원&nbsp;가&nbsp;입</h3><br/>
+                                <div style="height: 100%;">
+                                    <div class="m_item">
+                                        <label class="m_label">아이디：</label>
+                                        <input class="m_input" id="name" name="name" placeholder="아이디 입력" type="text" />
+                                    </div>
+                                    <div class="m_item">
+                                        <label class="m_label">이메일：</label> <input class="m_input" id="email" name="email" placeholder="등록할 이메일 주소 입력" type="text" />
+                                    </div>
+                                    <div class="m_item">
+                                        <label class="m_label">휴대폰번호：</label>
+                                        <input class="m_input" placeholder="휴대폰번호 '-' 없이 입력" id="mobile" name="mobile" type="text" />
+                                    </div>
+                                    <div class="m_item register_yzm">
+                                        <label class="m_label">인증번호：</label>
+                                        <input class="${code_css }" type="text" placeholder="6자리 입력" id="userCode" name="userCode" />
+                                        <input class="nav_btn" type="button" style="margin-left: 2.5em;" value="인증번호발송" id="btn_smsValid" onclick="sendSms()"/>
+                                    </div>
+                                    <div class="m_item">
+                                        <label class="m_label"></label>
+                                        <input class="m_submit m_active" type="button" value="인증번호 확인" id="btn_confirm_authenticateCode" onclick="confirm_authenticateCode()"/>
+                                    </div>
+                                    <div class="m_item register_pw">
+                                        <label class="m_label">비밀번호：</label>
+                                        <input class="m_input" name="password" type="password" placeholder="6자리이상의 비밀번호를 입력해주세요" id="password" />
+                                    </div>
+                                    <div class="m_item">
+                                        <label class="m_label">비밀번호확인：</label>
+                                        <input class="m_input" type="password" placeholder="비밀번호를 확인해주세요" name="confirm_password" id="confirm_password" />
+                                    </div>
+                                    <br/><br/>
+                                    <label class="m_label"></label>
+                                    <input class="m_submit m_active" type="submit" value="회원가입" />
+                                </div>
+                            </form>
+                        </div>
+                    <!--회원가입계정End-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragments/footer :: footer"></div>
+
+</div>
+<script type="text/javascript" th:src="@{/js/user/register.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/user/user.css}" />
+</body>
+</html>
