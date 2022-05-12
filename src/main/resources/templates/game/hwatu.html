@@ -1,0 +1,131 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+	<title>화투</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2H59G05B23"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-2H59G05B23');
+</script>
+<body>
+<div id="page-wrapper">
+
+
+	<div th:replace="fragments/bodyHeader :: bodyHeader"></div>
+
+	<!-- Features -->
+	<section id="header">
+		<div class="container" id="horizontalTab">
+			<ul class="tab_list">
+				<li>
+					<a href="#tab-1">
+						<img src="/img/gostop.jpg" id="gostop" height="200" width="265em" onmouseover="gostopChangeImg()" />
+						<img src="/img/gostop_hover.jpg" id="gostop_hover" height="200" width="265em" onmouseout="gostopShowOriginal()" />
+					</a>
+				</li>
+
+
+				<li>
+					<a href="#tab-2">
+						<img src="/img/seosda.png" id="seosda" height="200" width="265em" onmouseover="seosdaChangeImg()" />
+						<img src="/img/seosda_hover.jpeg" id="seosda_hover" height="200" width="265em" onmouseout="seosdaShowOriginal()" />
+					</a>
+				</li>
+			</ul>
+
+			<div id="tab-1">
+				<div id="gostop_media">
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/pb-4hAMSwRY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				</div>
+				<div id="gostop_data"></div>
+			</div>
+
+			<div id="tab-2">
+				<div id="seosda_media">
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/9PqPpkktdu4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				</div>
+				<div id="seosda_data"></div>
+			</div>
+		</div>
+	</section>
+
+
+
+	<div th:replace="fragments/footer :: footer"></div>
+
+</div>
+
+<!-- CSSs -->
+<link type="text/css" rel="stylesheet" th:href="@{/css/game/hwatu.css}"/>
+<link type="text/css" rel="stylesheet" th:href="@{/css/game/responsive-tabs.css}" />
+<link type="text/css" rel="stylesheet" th:href="@{/css/game/style.css}" />
+
+<!-- Scripts -->
+<script th:src="@{/js/game/seosda.js}"></script>
+<script th:src="@{/js/game/gostop.js}"></script>
+<script th:src="@{/js/game/browser.min.js}"></script>
+<script th:src="@{/js/game/breakpoints.min.js}"></script>
+<script th:src="@{/js/game/util.js}"></script>
+<script th:src="@{/js/game/jquery-2.1.0.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/game/jquery.responsiveTabs.js}"></script>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+	  var $tabs = $('#horizontalTab');
+	  $tabs.responsiveTabs({
+		  rotate: false,
+		  startCollapsed: 'accordion',
+		  collapsible: 'accordion',
+		  setHash: true,
+		  disabled: [3,4],
+		  click: function(e, tab) {
+			  $('.info').html('Tab <strong>' + tab.id + '</strong> clicked!');
+		  },
+		  activate: function(e, tab) {
+			  $('.info').html('Tab <strong>' + tab.id + '</strong> activated!');
+		  },
+		  activateState: function(e, state) {
+			  //console.log(state);
+			  $('.info').html('Switched from <strong>' + state.oldState + '</strong> state to <strong>' + state.newState + '</strong> state!');
+		  }
+	  });
+
+	  $('#start-rotation').on('click', function() {
+		  $tabs.responsiveTabs('startRotation', 1000);
+	  });
+	  $('#stop-rotation').on('click', function() {
+		  $tabs.responsiveTabs('stopRotation');
+	  });
+	  $('#start-rotation').on('click', function() {
+		  $tabs.responsiveTabs('active');
+	  });
+	  $('#enable-tab').on('click', function() {
+		  $tabs.responsiveTabs('enable', 3);
+	  });
+	  $('#disable-tab').on('click', function() {
+		  $tabs.responsiveTabs('disable', 3);
+	  });
+	  $('.select-tab').on('click', function() {
+		  $tabs.responsiveTabs('activate', $(this).val());
+	  });
+
+  });
+
+  // var _gaq = _gaq || [];
+  // _gaq.push(['_setAccount', 'UA-36251023-1']);
+  // _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  // _gaq.push(['_trackPageview']);
+  //
+  // (function() {
+	// var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	// ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	// var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  // })();
+
+</script>
+</body>
+</html>
