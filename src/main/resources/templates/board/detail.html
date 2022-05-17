@@ -1,0 +1,73 @@
+<!-- 에러가 발생한 경우 보여질 페이지 설정 -->
+<!--<%@ page errorPage="${pageContext.request.contextPath}/WEB-INF/views/exceptionhandling/error404.jsp"%>-->
+<!--<html th:include="/jsp/common/public.jspf" th:remove="tag"></html>-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>Card & board Game Guidebook</title>
+    <meta charset="utf-8" />
+</head>
+<body>
+<div id="page-wrapper">
+
+    <div th:replace="fragments/bodyHeader :: bodyHeader"></div>
+
+
+    <section id="header">
+        <div class="container">
+
+            <br/><br/><br/><br/>
+            <br/><br/><br/><br/>
+            <div class="title_box">
+                <h1 class="tit1">작성글 보기</h1>
+            </div>
+            <br/><br/>
+            <div class="content_box">
+                <div>
+                    <label>
+                        <input class="info_box" type="text" th:value="제목" readonly/>
+                        <input id="title" class="desc_box" type="text" th:value="${board.title}" readonly/>
+                    </label>
+                    <label>
+                        <input class="info_box" type="text" th:value="작성자" readonly/>
+                        <input id="memberNickname" class="desc_box" type="text" th:value="${board.userNickname}" readonly/>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input class="info_box" type="text" th:value="작성일" readonly/>
+                        <input id="writeDate" class="desc_box" type="text" th:value="${board.writeDate}" readonly/>
+                    </label>
+                    <label>
+                        <input class="info_box" type="text" th:value="조회수" readonly/>
+                        <input id="readCnt" class="desc_box" type="text" th:value="${board.readCnt}" readonly/>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input class="info_box" type="text" th:value="첨부파일" readonly/>
+                        <input id="attachment" type="text" th:value="${board.attachment}" readonly/>
+                    </label>
+                </div>
+                <div>
+                    <label for="content"></label><textarea cols="100%" rows="10" name="content" id="content" th:text="${board.content}" readonly></textarea>
+                </div>
+                <br/><br/>
+                <div class="btn-box" th:style="'align-content:center'">
+                    <input type="button" th:value="수정" id="btn_update" class="nav_btn" name="update_btn" />
+                    <input type="button" th:value="삭제" id="btn_delete" class="nav_btn" name="delete_btn" />
+                    <input type="button" th:value="목록으로" id="btn_list" class="nav_btn" />
+                    <input type="hidden" id="id" name="id" th:value="${board.id}" />
+                </div>
+                <br/><br/>
+            </div>
+        </div>
+    </section>
+
+
+    <div th:replace="fragments/footer :: footer"></div>
+
+</div>
+<script type="text/javascript" th:src="@{/js/board/detail.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/board/detail.css}" />
+</body>
+</html>
