@@ -1,0 +1,269 @@
+<!-- 에러가 발생한 경우 보여질 페이지 설정 -->
+<!--<%@ page errorPage="${pageContext.request.contextPath}/WEB-INF/views/exceptionhandling/error404.jsp"%>-->
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+	<title>트럼프 카드</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2H59G05B23"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-2H59G05B23');
+</script>
+<body>
+<div id="page-wrapper">
+
+	<div th:replace="fragments/bodyHeader :: bodyHeader"></div>
+
+	<!-- Features -->
+	<section id="header">
+		<div class="container wrapper" id="horizontalTab">
+			<ul class="tab_list">
+				<li>
+					<a href="#tab-1">
+						<img src="/img/poker.jpg" id="poker" height="200" width="265em" onmouseover="pokerChangeImg()"/>
+						<img src="/img/poker_hover.png" id="poker_hover" height="200" width="265em" onmouseout="pokerShowOriginal()" />
+					</a>
+
+				</li>
+				<li>
+					<a href="#tab-2">
+						<img src="/img/black_jack.jpg" id="black_jack" height="200" width="265em" onmouseover="blackjackChangeImg()" />
+						<img src="/img/blackjack_hover.png" id="blackjack_hover" height="200" width="265em" onmouseout="blackjackShowOriginal()"/>
+					</a>
+
+				</li>
+
+
+				<li>
+					<a href="#tab-3">
+						<img src="/img/bacara.jpg" id="bacara" height="200" width="265em" onmouseover="bacaraChangeImg()"/>
+						<img src="/img/bacara_hover.png" id="bacara_hover" height="200" width="265em" onmouseout="bacaraShowOriginal()"/>
+					</a>
+
+				</li>
+				<li>
+					<a href="#tab-4">
+						<img src="/img/hoola.png" id="hoola" height="200" width="265em" onmouseover="hoolaChangeImg()" />
+						<img src="/img/hoola_hover.png" id="hoola_hover" height="200" width="265em" onmouseout="hoolaShowOriginal()"/>
+					</a>
+				</li>
+			</ul>
+
+			<div class="tab_content" id="tab-1">
+				<div id="media">
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/3Vn74RL20GQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				</div>
+
+				<div class="thumb no6">
+					<p class="bg"></p>
+					<h3 style="font-size: 1.5em;">포커는 5장의 카드로 우열을 겨루어, 최고 등급의 조합을 가지면 이기는 게임</h3><br/>
+				</div>
+
+				<div class="game-guide">
+
+					<div class="wrap">
+
+						<div class="text">
+							<h3>Texas Held'em Poker</h3>
+							<p class="mt20">
+								Texas Held'em Poker는 2장의 Hole card(손에 든 카드, Poket card라고도
+								함)와 5장의 Community Card(테이블에 오픈 되는 공유카드)를 가지고 <span>총
+													7장 중 5장의 카드로 우열을 겨루어 최고 등급의 조합을 가지는 게임</span>입니다.
+							</p>
+							<p>각 포커 게임에서는 52장으로 이루어진 한 벌의 표준 카드를 사용합니다. 카드의 랭킹은 Ace,
+								King, Queen, Jack, 10...,4,3,2의 순으로 내려갑니다. 스트레이트(Straight)에서
+								Ace는 2보다 낮은 랭킹의 카드로 사용할 수도 있습니다.</p>
+						</div>
+					</div>
+
+					<div>
+						<h3>핸드의 종류 및 서열</h3>
+						<table class="center" border="2" bordercolor="#FFFFFF">
+							<colgroup>
+								<col width="25%" />
+								<col width="50%" />
+								<col width="25%" />
+							</colgroup>
+							<thead>
+							<tr>
+								<th>카드명</th>
+								<th>설명</th>
+								<th>예</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td>Royal Flush</td>
+								<td>동일한 무늬의 에이스, 킹, 퀸, 잭, 10으로 구성</td>
+								<td>높음</td>
+							</tr>
+							<tr>
+								<td>Straight Flush</td>
+								<td>무늬가 동일하고 연속된 5개의 숫자로 구성</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Four of a Kind<br></td>
+								<td>동일한 랭킹의 카드 4장으로 구성('쿼즈 quads')</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Full House</td>
+								<td>3장의 카드가 동일한 랭킹이고, 다른 2장이 동일한 랭킹인 경우.<br>2명
+									이상의 플레이어가 풀 하우스라면 3장의 카드의 랭킹이 높은 쪽이 이깁니다.
+								</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Flush</td>
+								<td>동일한 무늬의 카드 5장으로 구성.<br>두 명 이상이 플러쉬라면 가장 높은
+									카드를 가진 핸드가 승리합니다.
+								</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Straight</td>
+								<td>무늬와 상관없이 5장의 카드가 연속되는 숫자인 경우.<br>에이스는 가장 높은
+									스트레이트(A, K, Q, J, 10)와 가장 낮은 스트레이트(A, 2, 3, 4, 5)에서 모두 사용될
+									수 있습니다.
+								</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Three of a Kind</td>
+								<td>동일한 랭킹의 카드 3장으로 구성('트립스' 또는 '셋')</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Two Pairs</td>
+								<td>동일한 랭킹의 카드 2장이 2세트 있는 경우.<br>2명 이상의 플레이어가
+									투페어라면 가장 높은 페어를 가진 핸드가 승리합니다.<br>카드의 랭킹이 동일하다면 두 번째
+									페어가 높은 쪽이 승리합니다.<br>두 번째 페어도 동일하다면 다섯 번째 카드('키커')가 높은
+									쪽이 승리합니다.
+								</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>One Pair</td>
+								<td>랭킹이 동일한 카드가 2장일 때.<br>2명 이상의 플레이어가 똑같이 원페어라면
+									아웃사이드 카드가 높은 쪽이 승리합니다.
+								</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>Ace+King</td>
+								<td>가장 높은 카드를 가진 핸드가 승리합니다</td>
+								<td>낮음</td>
+							</tr>
+							</tbody>
+						</table>
+						<p class="text mt20">만약 같은 순위를 가지는 플레이어가 있는 경우, 플레이어가 가진
+							카드 중 족보에 영향을 미치는 더 높은 카드를 가지는 자가 이기게 되며, 영향을 미치는 카드마저 같은 순위의
+							카드라면 Push가 됩니다. 이때 베팅금액을 나눠 갖게 되며, 이를 Split이라 합니다. 남은 플레이어
+							모두가 족보에 영향을 미치는 카드를 가지지 않았을 경우 역시 Split이 되며 베팅금액을 나눠 갖게 됩니다.</p>
+					</div>
+				</div>
+			</div>
+			<div class="tab_content" id="tab-2">
+				<div id="black_jack_media">
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/929ZmmxbPes" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				</div>
+				<div id="black_jack_data">
+				</div>
+			</div>
+			<div class="tab_content" id="tab-3">
+				<div id="bacara_media">
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/b90A6CfUP_k" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				</div>
+				<div id="bacara_data">
+				</div>
+			</div>
+			<div class="tab_content" id="tab-4">
+				<div id="hoola_media">
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/qSvAQmwR2SQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				</div>
+				<div id="hoola_data">
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div th:replace="fragments/footer :: footer"></div>
+
+</div>
+<link type="text/css" rel="stylesheet"  th:href="@{/css/game/trumpcard.css}"/>
+<link type="text/css" rel="stylesheet" th:href="@{/css/game/responsive-tabs.css}" />
+<link type="text/css" rel="stylesheet" th:href="@{/css/game/style.css}" />
+<!-- Scripts -->
+<script th:src="@{/js/game/black_jack.js}"></script>
+<script th:src="@{/js/game/bacara.js}"></script>
+<script th:src="@{/js/game/hoola.js}"></script>
+<script th:src="@{/js/game/trumpcard.js}"></script>
+<script th:src="@{/js/game/browser.min.js}"></script>
+<script th:src="@{/js/game/breakpoints.min.js}"></script>
+<script th:src="@{/js/game/util.js}"></script>
+<script th:src="@{/js/game/jquery-2.1.0.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/game/jquery.responsiveTabs.js}"></script>
+
+<!--</script>-->
+<script type="text/javascript">
+
+	$(document).ready(function () {
+		var $tabs = $('#horizontalTab');
+		$tabs.responsiveTabs({
+			rotate: false,
+			startCollapsed: 'accordion',
+			collapsible: 'accordion',
+			setHash: true,
+			click: function(e, tab) {
+				$('.info').html('Tab <strong>' + tab.id + '</strong> clicked!');
+			},
+			activate: function(e, tab) {
+				$('.info').html('Tab <strong>' + tab.id + '</strong> activated!');
+			},
+			activateState: function(e, state) {
+				//console.log(state);
+				$('.info').html('Switched from <strong>' + state.oldState + '</strong> state to <strong>' + state.newState + '</strong> state!');
+			}
+		});
+
+		$('#start-rotation').on('click', function() {
+			$tabs.responsiveTabs('startRotation', 1000);
+		});
+		$('#stop-rotation').on('click', function() {
+			$tabs.responsiveTabs('stopRotation');
+		});
+		$('#start-rotation').on('click', function() {
+			$tabs.responsiveTabs('active');
+		});
+		$('#enable-tab').on('click', function() {
+			$tabs.responsiveTabs('enable', 3);
+		});
+		$('#disable-tab').on('click', function() {
+			$tabs.responsiveTabs('disable', 3);
+		});
+		$('.select-tab').on('click', function() {
+			$tabs.responsiveTabs('activate', $(this).val());
+		});
+
+	});
+	// var _gaq = _gaq || [];
+	// _gaq.push(['_setAccount', 'UA-36251023-1']);
+	// _gaq.push(['_setDomainName', 'jqueryscript.net']);
+	// _gaq.push(['_trackPageview']);
+	//
+	// (function() {
+	// 	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	// 	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	// 	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	// })();
+
+</script>
+</body>
+</html>
+
+
+
