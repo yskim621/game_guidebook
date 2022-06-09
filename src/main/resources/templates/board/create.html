@@ -18,35 +18,34 @@
                 <br/><br/><br/><br/>
                 <br/><br/><br/><br/>
                 <div class="title_box">
-                    <h1 class="tit1">작성글 수정</h1>
+                    <h1 class="tit1">게시글 작성</h1>
                 </div>
                 <br/><br/>
                 <div class="content_box">
                     <div>
                         <label>
                             <input class="info_box" type="text" th:value="제목" readonly/>
-                            <input class="desc_box" type="text" />
+                            <input class="desc_box" type="text" name="title"/>
                         </label>
                         <label>
                             <input class="info_box" type="text" th:value="작성자" readonly/>
-                            <input class="desc_box" type="text"/>
+                            <input class="desc_box" type="text" name="userNickname"/>
                         </label>
                     </div>
                     <div>
                         <label>
                             <input class="info_box" type="text" th:value="첨부파일" readonly/>
-                            <input class="attachment_box" type="text"/>
+                            <input class="attachment_box" type="text" name="attachment"/>
                             <input type="button" value="파일 찾기" id="btn_attachment" class="nav_btn"/>
                         </label>
                     </div>
                     <div>
-                        <textarea cols="79%" rows="10"></textarea>
+                        <textarea cols="79%" rows="10" name="content"></textarea>
                     </div>
                     <br/><br/>
                     <div class="btn-box" th:style="'align-content:center'">
-                        <input type="button" th:value="수정" id="btn_update" class="nav_btn" name="update_btn"/>
-                        <input type="button" th:value="삭제" id="btn_delete" class="nav_btn" name="delete_btn" />
-                        <input type="button" th:value="목록으로" id="btn_list" class="nav_btn" />
+                        <input type="button" th:value="글쓰기" id="btn_create" class="nav_btn" name="create_btn" th:onclick="form_submit()"/>
+                        <button type="button" id="btn_list" class="nav_btn" th:onclick="|location.href='@{/board/list}'|" >취소</button>
                         <input type="hidden"/>
                     </div>
                     <br/><br/>
@@ -59,7 +58,7 @@
     <div th:replace="fragments/footer :: footer"></div>
 
 </div>
-<!--<script type="text/javascript" th:src="@{/js/board/update.js}"></script>-->
+<script type="text/javascript" th:src="@{/js/board/create.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/css/board/create.css}" />
 </body>
 </html>
