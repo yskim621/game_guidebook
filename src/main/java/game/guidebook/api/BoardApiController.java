@@ -7,7 +7,7 @@ import game.guidebook.api.dto.BoardForm;
 import game.guidebook.common.AjaxResponseBody;
 import game.guidebook.controller.BaseController;
 import game.guidebook.domain.Board;
-import game.guidebook.repository.BoardRepository;
+import game.guidebook.repository.BoardJpaRepository;
 import game.guidebook.service.BoardService;
 import game.guidebook.service.dto.QueryParam;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.logging.Logger;
 
 @Slf4j
 @RestController
@@ -25,14 +24,12 @@ import java.util.stream.Collectors;
 public class BoardApiController extends BaseController {
 
     private final BoardService boardService;
-    private final BoardRepository boardRepository;
+    private final BoardJpaRepository boardJpaRepository;
 
     @PostMapping("ajaxList")
-    public SearchResult<BoardDto> contentList(@RequestBody QueryParam query_param, Model model,
-                               @RequestParam(value = "offset", defaultValue = "0") int offset,
-                               @RequestParam(value = "limit", defaultValue = "100") int limit
-    ) {
-        return boardService.findAll(query_param, offset, limit);
+    public SearchResult<BoardDto> contentList(@RequestBody QueryParam query_param) {
+
+        return boardService.findAll(query_param);
     }
 
     @PostMapping("create")
@@ -41,6 +38,20 @@ public class BoardApiController extends BaseController {
         {
             boardService.create(boardForm);
             return returnSuccessBody("게시글 작성이 완료 되었습니다.");
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return returnErrorBody(ex);
+        }
+    }
+
+    @PostMapping("update/{id}")
+    public AjaxResponseBody updateContent(@PathVariable("id") Long id, @ModelAttribute("board") Board board) {
+        try
+        {
+            boardService.update(id, board);
+            return returnSuccessBody("수정이 완료 되었습니다.");
         }
         catch (Exception ex)
         {
@@ -67,17 +78,5 @@ public class BoardApiController extends BaseController {
         }
     }
 
-    @PostMapping("update/{id}")
-    public AjaxResponseBody updateContent(@PathVariable("id") Long id, @ModelAttribute("board") Board board) {
-        try
-        {
-            boardService.update(id, board);
-            return returnSuccessBody("수정이 완료 되었습니다.");
-        }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-            return returnErrorBody(ex);
-        }
-    }
+
 }
