@@ -3,6 +3,7 @@ package game.guidebook.api;
 import game.common.persist.query.SearchResult;
 import game.common.util.Validate;
 import game.guidebook.api.dto.BoardDto;
+import game.guidebook.api.dto.BoardForm;
 import game.guidebook.common.AjaxResponseBody;
 import game.guidebook.controller.BaseController;
 import game.guidebook.domain.Board;
@@ -10,12 +11,14 @@ import game.guidebook.repository.BoardRepository;
 import game.guidebook.service.BoardService;
 import game.guidebook.service.dto.QueryParam;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/board")
@@ -30,6 +33,20 @@ public class BoardApiController extends BaseController {
                                @RequestParam(value = "limit", defaultValue = "100") int limit
     ) {
         return boardService.findAll(query_param, offset, limit);
+    }
+
+    @PostMapping("create")
+    public AjaxResponseBody createContent(@ModelAttribute BoardForm boardForm) {
+        try
+        {
+            boardService.create(boardForm);
+            return returnSuccessBody("게시글 작성이 완료 되었습니다.");
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return returnErrorBody(ex);
+        }
     }
 
     @PostMapping("delete/{id}")
