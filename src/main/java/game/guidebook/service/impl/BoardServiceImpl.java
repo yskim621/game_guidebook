@@ -4,6 +4,7 @@ import game.common.persist.query.SearchResult;
 import game.guidebook.api.dto.BoardDto;
 import game.guidebook.api.dto.BoardForm;
 import game.guidebook.domain.Board;
+import game.guidebook.repository.BoardJpaRepository;
 import game.guidebook.repository.BoardRepository;
 import game.guidebook.service.BoardService;
 import game.guidebook.service.dto.QueryParam;
@@ -11,10 +12,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -23,25 +24,27 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService {
 
+    private final BoardJpaRepository boardJpaRepository;
     private final BoardRepository boardRepository;
 
     @Override
-    public SearchResult<BoardDto> findAll(QueryParam query_param, int offset, int limit) {
+    public SearchResult<BoardDto> findAll(QueryParam query_param) {
 
-        List<Board> boards = boardRepository.findAll(query_param, offset, limit);
+        List<Board> boards = boardJpaRepository.findAll(query_param);
         List<BoardDto> collect = boards.stream()
                 .map(BoardDto::new)
                 .collect(Collectors.toList());
 
         SearchResult<BoardDto> result = new SearchResult<>();
         result.setResult(collect);
-        result.setCount(collect.size());
+        result.setCount((int) boardRepository.count());
         return result;
     }
 
     @Override
     public Board detail(Long id) {
-        return boardRepository.findOne(id);
+        Optional<Board> optBoard = boardRepository.findById(id);
+        return optBoard.orElseThrow();
     }
 
     @Override
@@ -52,12 +55,12 @@ public class BoardServiceImpl implements BoardService {
         board.setUserNickname(boardForm.getUserNickname());
         board.setAttachment(boardForm.getAttachment());
         board.setWriteDate(new Date());
-        boardRepository.create(board);
+        boardRepository.save(board);
     }
 
     @Override
     public Long update(Long id, Board board) {
-        Board originalContent = boardRepository.findOne(id);
+        Board originalContent = boardJpaRepository.findOne(id);
         originalContent.setTitle(board.getTitle());
         originalContent.setContent(board.getContent());
         originalContent.setAttachment(board.getAttachment());
@@ -67,6 +70,8 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public Long delete(Long id) {
-        return boardRepository.delete(id);
+        Board board = boardRepository.getById(id);
+        boardRepository.delete(board);
+        return board.getId();
     }
 }
