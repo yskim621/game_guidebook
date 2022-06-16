@@ -24,7 +24,6 @@ import java.util.logging.Logger;
 public class BoardApiController extends BaseController {
 
     private final BoardService boardService;
-    private final BoardJpaRepository boardJpaRepository;
 
     @PostMapping("ajaxList")
     public SearchResult<BoardDto> contentList(@RequestBody QueryParam query_param) {
