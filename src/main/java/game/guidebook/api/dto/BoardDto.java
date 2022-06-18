@@ -11,6 +11,8 @@ import java.util.Date;
 @AllArgsConstructor
 public class BoardDto {
 
+    private static final long serialVersionUID = 1L;
+
     private Long id;
 
     private String title;
