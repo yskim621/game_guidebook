@@ -23,7 +23,7 @@ public class Board {
 
     private Date writeDate;
 
-    private Integer readCnt;
+    private Integer readCnt = 0;
 
     private String attachment;
 
