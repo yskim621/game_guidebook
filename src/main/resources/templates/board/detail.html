@@ -53,9 +53,9 @@
                 </div>
                 <br/><br/>
                 <div class="btn-box" th:style="'align-content:center'">
-                    <input type="button" th:value="수정" id="btn_update" class="nav_btn" name="update_btn" />
+                    <button id="btn_update" class="nav_btn" name="update_btn" th:onclick="|location.href='@{/board/update/{id}(id=${board.id})}'|" >수정</button>
                     <input type="button" th:value="삭제" id="btn_delete" class="nav_btn" name="delete_btn" />
-                    <input type="button" th:value="목록으로" id="btn_list" class="nav_btn" />
+                    <button type="button" id="btn_list" class="nav_btn" th:onclick="|location.href='@{/board/list}'|" >목록으로</button>
                     <input type="hidden" id="id" name="id" th:value="${board.id}" />
                 </div>
                 <br/><br/>
