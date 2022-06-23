@@ -1,6 +1,14 @@
+buildscript {
+	ext {
+		queryDslVersion = "5.0.0"
+	}
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.6.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	//querydsl 추가
+	id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
 	id 'java'
 }
 
@@ -51,9 +59,11 @@ dependencies {
 	implementation group: 'net.sf.ehcache', name: 'ehcache', version: '2.9.1'
 	implementation group: 'redis.clients', name: 'jedis', version: '2.9.0'
 	implementation group: 'org.jsoup', name: 'jsoup', version: '1.14.3'
+	implementation group: 'net.nurigo', name: 'javaSDK', version: '2.2'
 
-
-
+	//querydsl 추가
+	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"  // QueryDSl을 통해 코드를 짤 때 쓰이는 라이브러리
+	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"  // generated에 Q[Entity] 파일을 생성하기 위한 라이브러리
 
 	compileOnly "org.springframework.boot:spring-boot-starter-security"
 	compileOnly 'org.projectlombok:lombok'
@@ -83,3 +93,24 @@ compileJava {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+//querydsl 추가 시작
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+	jpa = true
+	querydslSourcesDir = querydslDir
+}
+sourceSets {
+	main.java.srcDir querydslDir
+}
+compileQuerydsl{
+	options.annotationProcessorPath = configurations.querydsl
+}
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+	querydsl.extendsFrom compileClasspath
+}
+//querydsl 추가 끝
