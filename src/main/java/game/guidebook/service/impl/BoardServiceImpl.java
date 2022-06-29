@@ -44,6 +44,12 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public Board detail(Long id) {
         Optional<Board> optBoard = boardRepository.findById(id);
+        if (optBoard.isPresent()) {
+            Integer readCnt = optBoard.get().getReadCnt();
+            readCnt = readCnt + 1;
+            optBoard.get().setReadCnt(readCnt);
+        }
+
         return optBoard.orElseThrow();
     }
 
