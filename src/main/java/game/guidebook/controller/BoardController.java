@@ -33,7 +33,7 @@ public class BoardController extends BaseController {
     @GetMapping("get/{id}")
     public String detail(@PathVariable Long id, ModelMap map) {
 
-        Board board = boardJpaRepository.findOne(id);
+        Board board = boardService.detail(id);
         map.put("board", board);
 
         return "board/detail";
