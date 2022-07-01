@@ -6,6 +6,7 @@ import game.guidebook.controller.dto.RegisterDto;
 import game.guidebook.domain.User;
 import game.guidebook.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author zhaojt
  * @version 1.0, 2016年9月3日
  */
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("register")
