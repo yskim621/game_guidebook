@@ -6,6 +6,7 @@ import net.nurigo.java_sdk.api.Message;
 import org.json.simple.JSONObject;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 public interface UserService {
@@ -19,6 +20,8 @@ public interface UserService {
     public boolean existEmail(String email) throws Exception;
 
     public Long register(RegisterDto dto);
+
+    public Map<String, Object> login(String name, String password);
 
     public String sendSms(String mobileNo);
 }
