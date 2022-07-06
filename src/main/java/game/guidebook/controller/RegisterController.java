@@ -71,7 +71,7 @@ public class RegisterController extends BaseController {
     }
 
 	@PostMapping("form-submit")
-	public String register_submit(HttpServletRequest request, ModelMap map, RegisterDto dto)
+	public String register_submit(ModelMap map, RegisterDto dto)
 	{
         System.out.println("Register Controller 요청 도달==============================================================================");
 		try
