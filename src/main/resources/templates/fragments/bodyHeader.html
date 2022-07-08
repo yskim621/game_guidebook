@@ -6,7 +6,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-
+                    <h4 th:if="${session.loginUser} != null" th:text="|${session.loginUser.name}님 환영합니다.|" style="margin-left: 62em; margin-top: 2em; color: #FFFFFF" ></h4>
+                </div>
+                <div class="col-12">
                     <!-- Logo -->
                     <h1>
                         <a href="/" id="logo">C & B Guidebook</a>
@@ -19,7 +21,8 @@
                         <a th:href="@{/game/boardgame}">보드게임</a>
                         <a th:href="@{/board/list}">게시판</a>
                         <a th:href="@{/user/register}">회원가입</a>
-                        <a th:href="@{/user/login}">로그인</a>
+                        <a th:if="${session.loginUser} == null" th:href="@{/user/login}">로그인</a>
+                        <a th:if="${session.loginUser} != null" th:href="@{/user/logout}">로그아웃</a>
                     </nav>
                 </div>
             </div>
