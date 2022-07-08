@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 import static game.guidebook.controller.BaseController.*;
@@ -44,31 +46,21 @@ public class UserApiController {
     }
 
     @PostMapping(value = "login")
-    public String login(String name, String password, ModelMap map) {
+    public AjaxResponseBody login(String name, String password, ModelMap map, HttpServletRequest request, HttpServletResponse response) {
         log.info("name = {}", name);
         log.info("password = {}", password);
-        String error_message = null;
         if (Validate.validateObjectsNullOrEmpty(name, password))
         {
-            return returnErrorPage(map, "데이터가 검증되지 않았습니다, 페이지 새로고침 후 다시 시도해주세요!");
+            return returnErrorBody("데이터가 검증되지 않았습니다, 페이지 새로고침 후 다시 시도해주세요!");
         }
 
-        Map<String, Object> result = userService.login(name, password);
+        Map<String, Object> result = userService.login(name, password, request, response);
         if (result.get("result").equals("NotExistUser") || result.get("result").equals("WrongPassword") )
         {
-            error_message = "아이디 또는 비밀번호오류, 다시 시도해주세요";
-        }
-
-        if (StringUtils.isNotBlank(error_message))
-        {
-            map.put(SysConstants.REQUEST_KEY_LOGIN_PARAM_ERRORMESSAGE, error_message);
 //			map.put(SysConstants.REQUEST_KEY_LOGIN_PARAM_ISSHOWCAPTCHA, isCaptchaLogin(username, true, false));
-            return "login";
+            return returnErrorBody("아이디 또는 비밀번호 오류, 다시 시도해주세요");
         }
-        else
-        {
-            return "redirect:/board/list";
-        }
+        return returnSuccessBody();
     }
 
 }
