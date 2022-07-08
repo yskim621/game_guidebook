@@ -1,5 +1,7 @@
 package game.guidebook.service.impl;
 
+import game.guidebook.common.utils.SessionConst;
+import game.guidebook.common.utils.SessionManager;
 import game.guidebook.controller.dto.RegisterDto;
 import game.guidebook.common.utils.UserUtils;
 import game.guidebook.domain.User;
@@ -16,6 +18,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.*;
 
 @Slf4j
@@ -26,6 +31,7 @@ public class UserServiceImpl implements UserService {
 
 //    private final UserRepositoryOld userRepositoryOld;
     private final UserRepository userRepository;
+//    private final SessionManager sm;
 
     @Value("${app.sms.api-key}")
     private String apiKey;
@@ -90,13 +96,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Map<String, Object> login(String name, String password) {
+    public Map<String, Object> login(String name, String password, HttpServletRequest request, HttpServletResponse response) {
         Map<String, Object> map = new HashMap<>();
         Optional<User> optUser = userRepository.findUserByName(name);
         if (optUser.isEmpty()) {
             map.put("result", "NotExistUser");
+        } else {
+            if (!UserUtils.validatePassword(password, optUser.get().getPassword())) {
+                map.put("result", "WrongPassword");
+            } else {
+//                UserUtils.login(optUser.get());
+                //세션 매니저를 통해 세션 생성 및 회원정보 보관
+                //세션이 있으면 있는 세션 반환, 없으면 신규 세션 생성
+                HttpSession session = request.getSession();
+                session.setAttribute(SessionConst.LOGIN_MEMBER, optUser.get());
+                map.put("result", "SuccessLogin");
+            }
         }
-
         return map;
     }
 
