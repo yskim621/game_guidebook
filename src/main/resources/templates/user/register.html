@@ -32,15 +32,19 @@
                                         <input class="m_input" id="name" name="name" placeholder="아이디 입력" type="text" />
                                     </div>
                                     <div class="m_item">
-                                        <label class="m_label">이메일：</label> <input class="m_input" id="email" name="email" placeholder="등록할 이메일 주소 입력" type="text" />
+                                        <label class="m_label">사용자명(별명)：</label>
+                                        <input class="m_input" id="nickname" name="nickname" placeholder="사용자명(별명) 입력" type="text" />
                                     </div>
+<!--                                    <div class="m_item">-->
+<!--                                        <label class="m_label">이메일：</label> <input class="m_input" id="email" name="email" placeholder="등록할 이메일 주소 입력" type="text" />-->
+<!--                                    </div>-->
                                     <div class="m_item">
                                         <label class="m_label">휴대폰번호：</label>
                                         <input class="m_input" placeholder="휴대폰번호 '-' 없이 입력" id="mobile" name="mobile" type="text" />
                                     </div>
                                     <div class="m_item register_yzm">
                                         <label class="m_label">인증번호：</label>
-                                        <input class="${code_css }" type="text" placeholder="6자리 입력" id="userCode" name="userCode" />
+                                        <input class="m_input" type="text" placeholder="6자리 입력" id="userCode" name="userCode" />
                                         <input class="nav_btn" type="button" style="margin-left: 2.5em;" value="인증번호발송" id="btn_smsValid" onclick="sendSms()"/>
                                     </div>
                                     <div class="m_item">
