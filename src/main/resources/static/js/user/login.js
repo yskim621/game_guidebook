@@ -1,20 +1,29 @@
 function login_submit(){
-    Helper.post(Helper.basePath + '/bom/dw/assy/delete/' + id, function(data) {
-        if(data.success)
+    $.ajax({
+        url: Helper.basePath + '/api/user/login',
+        data: $("#loginForm").formToJson(),
+        type: "POST",
+        dataType: "json",
+        beforeSend: function()
         {
-            $("#bootTable").bootstrapTable("removeByUniqueId", id);
-            $("#bootTable").bootstrapTable("refresh");
-            $("#detailTable tr").bootstrapTable("removeByUniqueId", id);
-            $("#detailTable tr").bootstrapTable("refresh");
-            $("#assyNo").val("");
-            Helper.message.suc('삭제됨!');
-        }else
+            layer.load(1);
+        },
+        complete: function()
         {
-            Helper.message.err('삭제 실패：' + data.message);
+            layer.closeAll('loading');
+        },
+        success: function(data){
+            if(data.success){
+                Helper.message.suc('로그인 성공!');
+                window.location.href = Helper.basePath + "/board/list"
+            }else{
+                layer.alert(data.message);
+            }
+
+        },
+        error: function(data){
+            Helper.message.err('로그인 실패：' + data.message);
         }
     });
-    if (index > 0) {
-        $("#bootTable").bootstrapTable("refresh");
-    }
 }
 

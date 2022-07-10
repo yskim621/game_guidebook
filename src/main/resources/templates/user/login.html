@@ -24,7 +24,7 @@
                     <div class="main_container">
                         <!--회원가입계정Start-->
                         <div class="main_left">
-                            <form id="registerForm" method="post" th:action="@{/register/form-submit}" style="height: 100%;">
+                            <form id="loginForm" method="post" style="height: 100%;">
                                 <h3>로&nbsp;그&nbsp;인</h3>
                                 <br/><br/><br/><br/>
                                 <div style="height: 100%;">
@@ -44,7 +44,7 @@
                                     </div>
                                     <br/><br/><br/>
                                     <label class="m_label"></label>
-                                    <input class="m_submit m_active" type="submit" id="btn_login" value="로그인"/>
+                                    <input class="m_submit m_active" type="button" id="btn_login" value="로그인" th:onclick="login_submit()"/>
                                     <br/><br/><br/><br/>
                                     <div class="div_link">
                                         <a href="#" class="text_link">ID 찾기</a>
