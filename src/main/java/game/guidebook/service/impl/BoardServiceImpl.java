@@ -6,6 +6,7 @@ import game.guidebook.api.dto.BoardForm;
 import game.guidebook.domain.Board;
 import game.guidebook.repository.BoardJpaRepository;
 import game.guidebook.repository.BoardRepository;
+import game.guidebook.repository.impl.BoardRepositoryImpl;
 import game.guidebook.service.BoardService;
 import game.guidebook.service.dto.QueryParam;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 public class BoardServiceImpl implements BoardService {
 
     private final BoardJpaRepository boardJpaRepository;
+    private final BoardRepositoryImpl boardRepositoryImpl;
     private final BoardRepository boardRepository;
 
     @Override
@@ -37,7 +39,7 @@ public class BoardServiceImpl implements BoardService {
 
         SearchResult<BoardDto> result = new SearchResult<>();
         result.setResult(collect);
-        result.setCount((int) boardRepository.count());
+        result.setCount(boardRepositoryImpl.findCountByCondition(query_param));
         return result;
     }
 
