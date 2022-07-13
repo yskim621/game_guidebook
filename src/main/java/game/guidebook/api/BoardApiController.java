@@ -27,7 +27,9 @@ public class BoardApiController extends BaseController {
 
     @PostMapping("ajaxList")
     public SearchResult<BoardDto> contentList(@RequestBody QueryParam query_param) {
-
+        System.out.println("BoardApiController.contentList 호출 ==========================================================================");
+        log.info("searchType = {}", query_param.getSearchType());
+        log.info("value = {}", query_param.getValue());
         return boardService.findAll(query_param);
     }
 
