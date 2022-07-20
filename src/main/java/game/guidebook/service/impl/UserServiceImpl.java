@@ -79,7 +79,8 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setName(dto.getName());
         user.setMobile(dto.getMobile());
-        user.setEmail(dto.getEmail());
+        user.setNickname(dto.getNickname());
+//        user.setEmail(dto.getEmail());
         user.setPassword(UserUtils.entryptPassword(dto.getPassword().trim()));
         user.setCreateName(dto.getName());
         user.setCreateTime(new Date());
@@ -88,7 +89,7 @@ public class UserServiceImpl implements UserService {
         user.setLoginCount(1);
         user.setLastLoginIp(dto.getIp());
         user.setLastLoginTime(new Date());
-        userRepository.saveAndFlush(user);
+        userRepository.save(user);
 
         // 등록 후 자동 로그인
         //UserUtils.login(user);
@@ -105,11 +106,10 @@ public class UserServiceImpl implements UserService {
             if (!UserUtils.validatePassword(password, optUser.get().getPassword())) {
                 map.put("result", "WrongPassword");
             } else {
-//                UserUtils.login(optUser.get());
                 //세션 매니저를 통해 세션 생성 및 회원정보 보관
                 //세션이 있으면 있는 세션 반환, 없으면 신규 세션 생성
                 HttpSession session = request.getSession();
-                session.setAttribute(SessionConst.LOGIN_MEMBER, optUser.get());
+                session.setAttribute(SessionConst.LOGIN_USER, optUser.get());
                 map.put("result", "SuccessLogin");
             }
         }
