@@ -2,9 +2,6 @@ package game.guidebook.api;
 
 import game.common.util.Validate;
 import game.guidebook.common.AjaxResponseBody;
-import game.guidebook.common.utils.StringUtils;
-import game.guidebook.common.utils.UserUtils;
-import game.guidebook.constants.SysConstants;
 import game.guidebook.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -47,8 +44,6 @@ public class UserApiController {
 
     @PostMapping(value = "login")
     public AjaxResponseBody login(String name, String password, ModelMap map, HttpServletRequest request, HttpServletResponse response) {
-        log.info("name = {}", name);
-        log.info("password = {}", password);
         if (Validate.validateObjectsNullOrEmpty(name, password))
         {
             return returnErrorBody("데이터가 검증되지 않았습니다, 페이지 새로고침 후 다시 시도해주세요!");
@@ -57,7 +52,6 @@ public class UserApiController {
         Map<String, Object> result = userService.login(name, password, request, response);
         if (result.get("result").equals("NotExistUser") || result.get("result").equals("WrongPassword") )
         {
-//			map.put(SysConstants.REQUEST_KEY_LOGIN_PARAM_ISSHOWCAPTCHA, isCaptchaLogin(username, true, false));
             return returnErrorBody("아이디 또는 비밀번호 오류, 다시 시도해주세요");
         }
         return returnSuccessBody();
