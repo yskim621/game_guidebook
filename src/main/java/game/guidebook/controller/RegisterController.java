@@ -77,7 +77,7 @@ public class RegisterController extends BaseController {
 		try
 		{
 //			if (Validate.validateObjectsNullOrEmpty(vo,vo.getUserName(),vo.getMobile(), vo.getEmail(),vo.getPassword(),vo.getValidCode()))
-			if (Validate.validateObjectsNullOrEmpty(dto, dto.getName(),dto.getMobile(), dto.getEmail(),dto.getPassword()))
+			if (Validate.validateObjectsNullOrEmpty(dto, dto.getName(),dto.getMobile(), dto.getNickname(),dto.getPassword()))
 			{
 				return returnErrorPage(map, "등록정보를 바르게 입력해 주세요");
 			}
