@@ -3,12 +3,14 @@ package game.guidebook.repository;
 import game.guidebook.domain.Board;
 import game.guidebook.domain.User;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import java.util.Optional;
 
+@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class UserRepositoryOld {
