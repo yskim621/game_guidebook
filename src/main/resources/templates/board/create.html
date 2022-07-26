@@ -29,7 +29,7 @@
                         </label>
                         <label>
                             <input class="info_box" type="text" th:value="작성자" readonly/>
-                            <input class="desc_box" type="text" name="userNickname"/>
+                            <input class="desc_box" type="text" name="userNickname" th:if="${session.loginUser} != null" th:value="${session.loginUser.nickname}" readonly/>
                         </label>
                     </div>
                     <div>
