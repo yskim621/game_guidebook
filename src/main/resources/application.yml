@@ -1,0 +1,44 @@
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/yskim621
+    username: yskim621
+    password: Yoonsuk1410517!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+#        show_sql: true
+        format_sql: true
+        default_batch_fetch_size: 100
+
+  devtools:
+    livereload:
+      enabled: true
+
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace
+
+app:
+  sms:
+    api-key: NCSADLWL9AQ3OE0R
+    api-secret: WQUGTKJXILFB0ZI3YZTPX0WV2OBG0U4W
+#    api-key: NCSBX9ZGK0E5TJN9
+#    api-secret: SGF2RTWVZPX8YJPCFUIBEERU7F8ZXATN
+    send-number: "01099660621"
+    PFID: KA01PF220125060128598UVxY3fngJOD
+
+server:
+  servlet:
+    session:
+      timeout: 3600
+
+
+
+
