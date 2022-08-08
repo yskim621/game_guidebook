@@ -28,18 +28,6 @@ public interface CommonDao
 {
 	<T extends AbstractEntity> int countByDynamicQuery(DynamicQuery dynamicQuery, Class<T> type);
 
-	/**
-	 * <pre>
-	 * 通过命名查询进行分页查询时获取记录数
-	 * </pre>
-	 * @param <T> 实体类型
-	 * @param type 实体类型
-	 * @param name 命名查询名称
-	 * @param pageSize 每页记录数
-	 * @param pageIndex 页码
-	 * @param parameters 参数列表
-	 * @return 实体对象集合记录数
-	 */
 	<T extends AbstractEntity> int countByNamedQuery(Class<T> type, String name, Object... parameters);
 
 	<T extends AbstractEntity> void deleteByIds(Class<T> type, Object... ids);
