@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -26,6 +27,9 @@ public class Board {
     private String attachment;
 
     private String userNickname;
+
+    @OneToMany(mappedBy = "board")
+    private List<Reply> replies;
 
 //    private Long userId;
 
